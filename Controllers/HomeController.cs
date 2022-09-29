@@ -27,9 +27,13 @@ namespace CDUDB1INF272.Controllers
         
 
        
-      
+      public ActionResult BookIndex()
+       {
+            return View();
+       }
 
-       
+
+
 
     }
 
