@@ -16,7 +16,7 @@ namespace CDUDB1INF272.Controllers
         public ActionResult Index()            
         {
                
-                List<DestinationModel> databaseDest = dataService.getDest();
+            List<DestinationModel> databaseDest = dataService.getDest();
             if (databaseDest.Count == 0)
             {
                 ViewBag.Message = "Database not found";

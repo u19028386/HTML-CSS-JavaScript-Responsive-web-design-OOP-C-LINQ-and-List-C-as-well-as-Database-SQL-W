@@ -25,7 +25,7 @@ namespace CDUDB1INF272.Models
 
         public string getConnectionString()
         {
-            stringBuilder["Data Source"] = ".\\SQLEXPRESS";
+            stringBuilder["Data Source"] = "LAPTOP-KED1PJ97\\SQLEXPRESS";
             stringBuilder["Integrated Security"] = "true";
             stringBuilder["Initial Catalog"] = "Library";
 
@@ -33,9 +33,9 @@ namespace CDUDB1INF272.Models
 
         }
 
-        public void openConnection()
+        public bool openConnection()
         {
-            //bool status = true;
+            bool status = true;
             try
             {
                 String conString = getConnectionString();
@@ -45,9 +45,9 @@ namespace CDUDB1INF272.Models
             catch (Exception exc)
             {
 
-                //status = false;
+                status = false;
             }
-            //return status;
+            return status;
         }
 
         public bool closeConnection()
@@ -75,12 +75,12 @@ namespace CDUDB1INF272.Models
                     while (reader.Read())
                     {
                         DestinationModel tmpDest = new DestinationModel();
-                        tmpDest.Name = reader["Name"].ToString();
-                        tmpDest.Author = reader["Author"].ToString();
-                        tmpDest.ID = Convert.ToInt32(reader["id"]);
-                        tmpDest.PageCount = Convert.ToInt32(reader["Pagecount"]);
-                        tmpDest.Points = Convert.ToInt32(reader["Points"]);
-                        tmpDest.Available = Convert.ToBoolean(reader["Available"]);
+                        tmpDest.Name = reader["name"].ToString();
+                        //tmpDest.Author = reader["author"].ToString();
+                        //tmpDest.ID = Convert.ToInt32(reader["id"]);
+                        //tmpDest.PageCount = Convert.ToInt32(reader["Pagecount"]);
+                        //tmpDest.Points = Convert.ToInt32(reader["Points"]);
+                        //tmpDest.Available = Convert.ToBoolean(reader["Available"]);
 
                         destinations.Add(tmpDest);
                     }
