@@ -69,18 +69,19 @@ namespace CDUDB1INF272.Models
             try
             {
                 openConnection();
-                SqlCommand command = new SqlCommand("select books.name,books.bookId,authors.name from books inner join authors on books.authorID = authors.authorID", currConnection);
+                SqlCommand command = new SqlCommand("select books.pagecount,books.point, books.name,books.bookId,authors.name as author, types.name as tname from books inner join authors on books.authorID = authors.authorID inner join types on books.typeId = types.typeID", currConnection);
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
                         DestinationModel tmpDest = new DestinationModel();
                         tmpDest.Name = reader["name"].ToString();
-                        tmpDest.Author = reader["name"].ToString();
+                        tmpDest.Author = reader["author"].ToString();
                         tmpDest.ID = Convert.ToInt32(reader["bookid"]);
-                        //tmpDest.PageCount = Convert.ToInt32(reader["Pagecount"]);
-                        //tmpDest.Points = Convert.ToInt32(reader["Points"]);
+                        tmpDest.PageCount = Convert.ToInt32(reader["pagecount"]);
+                        tmpDest.Points = Convert.ToInt32(reader["point"]);
                         //tmpDest.Available = Convert.ToBoolean(reader["Available"]);
+                        tmpDest.Type = reader["tname"].ToString();
 
                         destinations.Add(tmpDest);
                     }

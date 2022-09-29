@@ -20,14 +20,14 @@ namespace CDUDB1INF272.Models
 
 
 
-        public DestinationModel(int bookid, string name, string author, string type, int pageCount, int points, bool available)
+        public DestinationModel(int bookid, string name, string author, string type, int pageCount, int point, bool available)
         {
             ID = bookid;
             Name = name;
             Author = author;
             Type = type;
             PageCount = pageCount;
-            Points = points;
+            Points = point;
             Available = available;
         }
 
