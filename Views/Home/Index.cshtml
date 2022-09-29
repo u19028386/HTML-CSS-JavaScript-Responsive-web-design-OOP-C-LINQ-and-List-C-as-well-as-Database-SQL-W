@@ -10,25 +10,21 @@
 
 <table class="table">
     <tr>
-        <th>
-            Name
-        </th>
-        <th>
-            Authour
-        </th>
-        <th>hu</th>
+        <th>#</th>
+        <th>Name</th>
+        <th>Author</th>
     </tr>
 
 @foreach (var dest in Model) {
     <tr>
         <td>
+            @dest.ID
+        </td>
+        <td>
             @dest.Name
         </td>
         <td>
-            hj
-        </td>
-        <td>
-            bgzdvb
+            @dest.Author
           
         </td>
     </tr>

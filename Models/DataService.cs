@@ -69,15 +69,15 @@ namespace CDUDB1INF272.Models
             try
             {
                 openConnection();
-                SqlCommand command = new SqlCommand("select * from books", currConnection);
+                SqlCommand command = new SqlCommand("select books.name,books.bookId,authors.name from books inner join authors on books.authorID = authors.authorID", currConnection);
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
                         DestinationModel tmpDest = new DestinationModel();
                         tmpDest.Name = reader["name"].ToString();
-                        //tmpDest.Author = reader["author"].ToString();
-                        //tmpDest.ID = Convert.ToInt32(reader["id"]);
+                        tmpDest.Author = reader["name"].ToString();
+                        tmpDest.ID = Convert.ToInt32(reader["bookid"]);
                         //tmpDest.PageCount = Convert.ToInt32(reader["Pagecount"]);
                         //tmpDest.Points = Convert.ToInt32(reader["Points"]);
                         //tmpDest.Available = Convert.ToBoolean(reader["Available"]);
