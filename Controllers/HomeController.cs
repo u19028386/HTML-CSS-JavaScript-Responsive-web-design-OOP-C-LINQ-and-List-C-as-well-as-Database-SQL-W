@@ -29,8 +29,13 @@ namespace CDUDB1INF272.Controllers
        
       public ActionResult BookIndex()
        {
-            return View();
-       }
+            List<BorrowModel> databaseBorrow = dataService.getBorrow();
+            if (databaseBorrow.Count == 0)
+            {
+                ViewBag.Message = "Database not found";
+            }
+            return View(databaseBorrow);
+        }
 
 
 

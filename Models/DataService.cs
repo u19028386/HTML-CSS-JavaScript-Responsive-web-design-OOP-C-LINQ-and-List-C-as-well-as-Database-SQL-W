@@ -95,7 +95,33 @@ namespace CDUDB1INF272.Models
             return destinations;
         }
 
+        public List<BorrowModel> getBorrow()
+        {
+            List<BorrowModel> borrows = new List<BorrowModel>();
+            try
+            {
+                openConnection();
+                SqlCommand command = new SqlCommand("select borrowId,takenDate, broughtDate, students.name as sname from borrows inner join students on borrows.studentId = students.studentId", currConnection);
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        BorrowModel tmpBorrows = new BorrowModel();
+                        tmpBorrows.ID = Convert.ToInt32(reader["borrowId"]);
+                        tmpBorrows.BroughtDate = Convert.ToDateTime(reader["broughtDate"]);
+                        tmpBorrows.TakenDate = Convert.ToDateTime(reader["takenDate"]);
+                        tmpBorrows.BorrowedBy = reader["sname"].ToString();
+                        borrows.Add(tmpBorrows);
+                    }
+                }
+                closeConnection();
+            }
+            catch
+            {
 
+            }
+            return borrows;
+        }
 
         public DestinationModel getDestById(int id)
         {
