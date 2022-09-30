@@ -4,15 +4,56 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.SqlClient;
 
 namespace CDUDB1INF272.Controllers
 {
     public class HomeController : Controller
     {
+        private SqlConnection myConnection = new SqlConnection(Globals.ConnectionString);
 
         private DataService dataService = DataService.getDataService();
 
-              
+        public ActionResult ComplexSearch(string bookname,string btype, string bauthor)
+        {
+            try
+            {
+                SqlCommand myComplexSearch;
+                myComplexSearch = new SqlCommand("select books.pagecount,books.point, books.name,books.bookId,authors.name as author, types.name as tname from books inner join authors on books.authorID = authors.authorID inner join types on books.typeId = types.typeID WHERE books.name =" + bookname + " AND types.name =" + btype + "AND authors.name=" + bauthor, myConnection);
+
+                myConnection.Open();
+                //Read all person records for table
+
+                SqlDataReader myReader = myComplexSearch.ExecuteReader();
+                Globals.borrowList.Clear();
+                while (myReader.Read())
+                {
+                    DestinationModel book = new DestinationModel();
+                    
+                    book.Name = myReader["name"].ToString();
+                    book.Author = myReader["author"].ToString();
+                    book.ID = Convert.ToInt32(myReader["bookid"]);
+                    book.PageCount = Convert.ToInt32(myReader["pagecount"]);
+                    book.Points = Convert.ToInt32(myReader["point"]);
+                    //tmpDest.Available = Convert.ToBoolean(reader["Available"]);
+                    book.Type = myReader["tname"].ToString();
+
+                   
+                    Globals.bookList.Add(book);
+                }
+                ViewBag.SearchStatus = 2;
+                ViewBag.SearchText = "Advanced search results";
+            }
+            catch (Exception err)
+            {
+                ViewBag.Status = 0;
+            }
+            finally
+            {
+                myConnection.Close();
+            }
+            return View("Index", Globals.bookList);
+        }
         public ActionResult Index()            
         {
                
@@ -36,6 +77,59 @@ namespace CDUDB1INF272.Controllers
             }
             return View(databaseBorrow);
         }
+
+        [HttpGet]
+        public ActionResult Me(int id)
+        {
+            BorrowModel foundborrow = dataService.getBById(id);
+            return View(foundborrow);
+        }
+
+        [HttpPost]
+        public ActionResult Me(BorrowModel someBorrow)
+        {
+            
+            return RedirectToAction("BookIndex");
+        }
+
+
+
+        // new 
+        //    [HttpGet]
+        //    public ActionResult Update(int id)
+        //    {
+        //        DestinationModel foundDest = dataService.getDestById(id);
+        //        return View(foundDest);
+        //    }
+
+        //    [HttpPost]
+        //    public ActionResult Update(DestinationModel someDest)
+        //    {
+        //        dataService.updateDest(someDest);
+        //        return RedirectToAction("Index");
+        //    }
+
+        //    [HttpGet]
+        //    public ActionResult Add()
+        //    {
+        //        return View();
+        //    }
+
+        //    [HttpPost]
+        //    public ActionResult Add(DestinationModel someDest)
+        //    {
+        //        ViewBag.Message = dataService.createDest(someDest);
+        //        return RedirectToAction("Index");
+
+
+        //    }
+
+        //    public ActionResult Delete(int id)
+        //    {
+        //        dataService.deleteDest(id);
+        //        return RedirectToAction("Index");
+        //    }
+
 
 
 

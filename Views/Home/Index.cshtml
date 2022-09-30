@@ -5,7 +5,14 @@
 }
 <h1 class="display-4">Index</h1>
 <h3>@ViewBag.Message</h3>
+@using (Html.BeginForm("FuzzySearch", "Home", FormMethod.Post, new { style = "width:100%" }))
+{
+    <input type="text" style="width:90%;max-width:none; display:inline" name="bookname" class="form-control"  required />
+    <
 
+    <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+
+}
 
 
 <table class="table">
@@ -20,19 +27,20 @@
         <th></th>
     </tr>
 
-@foreach (var dest in Model) {
-<tr>
-    <td>@dest.ID</td>
-    <td>@dest.Name</td>
-    <td>@dest.Author</td>
-    <td>@dest.Type</td>
-    <td>@dest.PageCount</td>
-    <td>@dest.Points</td>
-    <td>function needed</td>
-    <td>buttons</td>
-    
+    @foreach (var dest in Model)
+    {
+        <tr>
+            <td>@dest.ID</td>
+            <td>@dest.Name</td>
+            <td>@dest.Author</td>
+            <td>@dest.Type</td>
+            <td>@dest.PageCount</td>
+            <td>@dest.Points</td>
+            <td>function needed</td>
+            <td>buttons</td>
 
-</tr>
-}
+
+        </tr>
+    }
 
 </table>

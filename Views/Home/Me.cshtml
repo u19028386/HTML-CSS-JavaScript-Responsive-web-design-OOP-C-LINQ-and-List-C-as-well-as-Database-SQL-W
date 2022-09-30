@@ -1,0 +1,32 @@
+﻿@model IEnumerable<CDUDB1INF272.Models.BorrowModel>
+@{
+    ViewBag.Title = "Me";
+}
+
+<h2>Me</h2>
+
+<h3>@ViewBag.Message</h3>
+
+
+
+<table class="table">
+    <tr>
+        <th>#</th>
+        <th>Taken Date</th>
+        <th>Brought Date</th>
+        <th>Borrowed By</th>
+    </tr>
+
+    @foreach (var borrow in Model)
+    {
+        <tr>
+            <td>@borrow.ID</td>
+            <td>@borrow.TakenDate</td>
+            <td>@borrow.BroughtDate</td>
+            <td>@borrow.BorrowedBy</td>
+        </tr>
+    }
+
+</table>
+
+
