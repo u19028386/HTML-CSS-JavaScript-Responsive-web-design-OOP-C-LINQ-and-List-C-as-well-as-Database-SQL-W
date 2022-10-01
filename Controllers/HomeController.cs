@@ -52,15 +52,15 @@ namespace CDUDB1INF272.Controllers
             }
             return View( Globals.studentList);
         }
-        public ActionResult ComplexSearch(string bookname)
+        public ActionResult ComplexSearch(string id)
         {
             try
             {
                 SqlCommand myComplexSearch;
-                myComplexSearch = new SqlCommand("select books.pagecount,books.point, books.name,books.bookId,authors.name as author, types.name as tname from books inner join authors on books.authorID = authors.authorID inner join types on books.typeId = types.typeID" , myConnection);
+                myComplexSearch = new SqlCommand("select books.pagecount,books.point, books.name,books.bookId,authors.name as author, types.name as tname from books inner join authors on books.authorID = authors.authorID inner join types on books.typeId = types.typeID WHERE authors.name =" + id , myConnection);
 
                 myConnection.Open();
-                //Read all person records for table
+              
 
                 SqlDataReader myReader = myComplexSearch.ExecuteReader();
                 Globals.complexList.Clear();
@@ -90,7 +90,7 @@ namespace CDUDB1INF272.Controllers
             {
                 myConnection.Close();
             }
-            return View(Globals.complexList);
+            return View("Index",Globals.complexList);
         }
         public ActionResult Index()            
         {
