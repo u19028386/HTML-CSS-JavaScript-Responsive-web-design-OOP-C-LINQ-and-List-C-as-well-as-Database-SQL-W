@@ -172,6 +172,7 @@
     <Content Include="Views\Home\ViewStudent.cshtml" />
     <Content Include="Views\Home\BookInfo.cshtml" />
     <Content Include="Views\Home\MView.cshtml" />
+    <Content Include="Views\Home\Dropdown1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

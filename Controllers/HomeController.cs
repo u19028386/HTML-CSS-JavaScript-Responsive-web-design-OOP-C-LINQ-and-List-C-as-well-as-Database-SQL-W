@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.SqlClient;
+using System.Data;
+using System.Configuration;
 
 namespace CDUDB1INF272.Controllers
 {
@@ -131,7 +133,24 @@ namespace CDUDB1INF272.Controllers
         }
         public ActionResult Index()            
         {
-               
+            SqlCommand myComplexSearch;
+            myComplexSearch = new SqlCommand("select * from authors", myConnection);
+
+            myConnection.Open();
+            SqlDataAdapter datasetA = new SqlDataAdapter(myComplexSearch);
+            DataSet datas = new DataSet();
+            datasetA.Fill(datas);
+            ViewBag.authorname = datas.Tables[0];
+            List<SelectListItem> getAuthorname = new List<SelectListItem>();
+
+            foreach (System.Data.DataRow dr in ViewBag.authorname.Rows)
+            {
+                getAuthorname.Add(new SelectListItem { Text = dr["name"].ToString(), Value = dr["name"].ToString() });
+            }
+
+            ViewBag.Authors = getAuthorname;
+            myConnection.Close();
+
             List<DestinationModel> databaseDest = dataService.getDest();
             if (databaseDest.Count == 0)
             {
@@ -180,6 +199,29 @@ namespace CDUDB1INF272.Controllers
                 dataService.BooksInfo(someB);
                 return View();
             }
+
+        public ActionResult Dropdown1()
+        {
+            SqlCommand myComplexSearch;
+            myComplexSearch = new SqlCommand("select * from authors", myConnection);
+
+            myConnection.Open();
+            SqlDataAdapter datasetA = new SqlDataAdapter(myComplexSearch);
+            DataSet datas = new DataSet();
+            datasetA.Fill(datas);
+            ViewBag.authorname = datas.Tables[0];
+            List<SelectListItem> getAuthorname = new List<SelectListItem>();
+
+            foreach(System.Data.DataRow dr in ViewBag.authorname.Rows)
+            {
+                getAuthorname.Add(new SelectListItem { Text = dr["name"].ToString(), Value = dr["name"].ToString() });
+            }
+
+            ViewBag.Authors = getAuthorname;
+            myConnection.Close();
+            return View();
+
+        }
 
 
         // new 
