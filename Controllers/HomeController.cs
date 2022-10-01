@@ -91,12 +91,12 @@ namespace CDUDB1INF272.Controllers
             }
             return View( Globals.studentList);
         }
-        public ActionResult ComplexSearch(string id)
+        public ActionResult ComplexSearch(int id)
         {
             try
             {
                 SqlCommand myComplexSearch;
-                myComplexSearch = new SqlCommand("select books.pagecount,books.point, books.name,books.bookId,authors.name as author, types.name as tname from books inner join authors on books.authorID = authors.authorID inner join types on books.typeId = types.typeID WHERE authors.name =" + id , myConnection);
+                myComplexSearch = new SqlCommand("select books.pagecount,books.point, books.name,books.bookId,authors.name as author, types.name as tname from books inner join authors on books.authorID = authors.authorID inner join types on books.typeId = types.typeID WHERE books.bookId =" + id , myConnection);
 
                 myConnection.Open();
               
@@ -150,6 +150,27 @@ namespace CDUDB1INF272.Controllers
 
             ViewBag.Authors = getAuthorname;
             myConnection.Close();
+
+            //BEGIN
+            SqlCommand myComplexSearch1;
+            myComplexSearch1 = new SqlCommand("select * from types", myConnection);
+
+            myConnection.Open();
+            SqlDataAdapter datasetA1 = new SqlDataAdapter(myComplexSearch1);
+            DataSet datas1 = new DataSet();
+            datasetA1.Fill(datas1);
+            ViewBag.typename = datas1.Tables[0];
+            List<SelectListItem> getTypename = new List<SelectListItem>();
+
+            foreach (System.Data.DataRow dr1 in ViewBag.typename.Rows)
+            {
+                getTypename.Add(new SelectListItem { Text = dr1["name"].ToString(), Value = dr1["name"].ToString() });
+            }
+
+            ViewBag.Types = getTypename;
+            myConnection.Close();
+
+            //END 
 
             List<DestinationModel> databaseDest = dataService.getDest();
             if (databaseDest.Count == 0)

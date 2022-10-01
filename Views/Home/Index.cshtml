@@ -6,21 +6,27 @@
 <h3>@ViewBag.Message</h3>
 @using (Html.BeginForm("ComplexSearch", "Home", FormMethod.Post, new { style = "width:100%" }))
 {
-    <input type="text" style="width:200px;max-width:none; display:inline" name="id" class="form-control"  />
-    //
+    <input type="number" style="width:200px;max-width:none; display:inline" name="id" class="form-control" />
+
+
     //<input type="text" style="width:200px;max-width:none; display:inline" name="btype" class="form-control" placeholder="Type" required />
     //<input type="text" style="width:200px;max-width:none; display:inline" name="bauthor" class="form-control" placeholder="Author" required />
 
-    <button type="submit" class="btn btn-primary" style="width:200px;display:inline">Search</button>
-    <a href="@Url.Action("ComplexSearch", "Home")" style="width:200px;position: relative; display:inline;left:850px;top:-3px;background-color:green;color:white;">Clear</a>
+    <button type="submit" class="btn btn-success" style="width:200px;display:inline">Search</button>
+    
+    <a href="@Url.Action("Index", "Home")" style="width:200px;height:100px;position: relative; display:inline;left:850px;top:-3px;background-color:red;color:white;">Clear</a>
 
 
 }
 
-@Html.DropDownList("Authors");
+@*@Html.DropDownList("Types");*@
+@*@Html.DropDownList("Authors");*@
 
 
-<a href="@Url.Action("Index", "Home")" style="width:200px;position: relative; display:inline;left:850px;top:-3px;background-color:green;color:white;">Clear</a>
+
+
+
+@*<a href="@Url.Action("Index", "Home")" style="width:200px;position: relative; display:inline;left:850px;top:-3px;background-color:green;color:white;">Clear</a>*@
 
 
 <table class="table" id="t1">
@@ -45,7 +51,7 @@
             <td>@dest.PageCount</td>
             <td>@dest.Points</td>
             <td>function needed</td>
-            <td>@Html.ActionLink("Update", "MView", "Home", new { id = dest.ID }, htmlAttributes: new { @class = "btn btn-primary" })</td>
+            <td>@Html.ActionLink("View", "MView", "Home", new { id = dest.ID }, htmlAttributes: new { @class = "btn btn-primary" })</td>
 
 
         </tr>
