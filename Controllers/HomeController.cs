@@ -52,18 +52,18 @@ namespace CDUDB1INF272.Controllers
             }
             return View( Globals.studentList);
         }
-        public ActionResult ComplexSearch(string bookname,string btype, string bauthor)
+        public ActionResult ComplexSearch(string bookname)
         {
             try
             {
                 SqlCommand myComplexSearch;
-                myComplexSearch = new SqlCommand("select books.pagecount,books.point, books.name,books.bookId,authors.name as author, types.name as tname from books inner join authors on books.authorID = authors.authorID inner join types on books.typeId = types.typeID WHERE books.name =" + bookname + " AND types.name =" + btype + "AND authors.name=" + bauthor + ";", myConnection);
+                myComplexSearch = new SqlCommand("select books.pagecount,books.point, books.name,books.bookId,authors.name as author, types.name as tname from books inner join authors on books.authorID = authors.authorID inner join types on books.typeId = types.typeID" , myConnection);
 
                 myConnection.Open();
                 //Read all person records for table
 
                 SqlDataReader myReader = myComplexSearch.ExecuteReader();
-                Globals.borrowList.Clear();
+                Globals.complexList.Clear();
                 while (myReader.Read())
                 {
                     DestinationModel book = new DestinationModel();
@@ -77,7 +77,7 @@ namespace CDUDB1INF272.Controllers
                     book.Type = myReader["tname"].ToString();
 
                    
-                    Globals.bookList.Add(book);
+                    Globals.complexList.Add(book);
                 }
                 ViewBag.SearchStatus = 2;
                 ViewBag.SearchText = "Advanced search results";
@@ -90,7 +90,7 @@ namespace CDUDB1INF272.Controllers
             {
                 myConnection.Close();
             }
-            return View("Index", Globals.bookList);
+            return View(Globals.complexList);
         }
         public ActionResult Index()            
         {

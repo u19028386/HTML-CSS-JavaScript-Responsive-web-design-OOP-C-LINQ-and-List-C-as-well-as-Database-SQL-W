@@ -15,6 +15,7 @@ namespace CDUDB1INF272.Controllers
             public static string ConnectionString = "Data Source=LAPTOP-KED1PJ97\\SQLEXPRESS;Initial Catalog=Library;Integrated Security=True";
             public static List<BorrowModel> borrowList = new List<BorrowModel>();
             public static List<DestinationModel> bookList = new List<DestinationModel>();
+        public static List<DestinationModel> complexList = new List<DestinationModel>();
         public static List<Student> studentList = new List<Student>();
     }
     

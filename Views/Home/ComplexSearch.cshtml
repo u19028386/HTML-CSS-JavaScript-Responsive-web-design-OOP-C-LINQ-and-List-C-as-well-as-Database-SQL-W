@@ -1,10 +1,9 @@
 ﻿@model IEnumerable<CDUDB1INF272.Models.DestinationModel>
-
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "ComplexSearch";
 }
-<h1 class="display-4">Index</h1>
-<h3>@ViewBag.Message</h3>
+
+<h2>ComplexSearch</h2>
 @using (Html.BeginForm("ComplexSearch", "Home", FormMethod.Post, new { style = "width:100%" }))
 {
     <input type="text" style="width:200px;max-width:none; display:inline" name="bookname" class="form-control" placeholder="Name" />
@@ -12,8 +11,6 @@
     //<input type="text" style="width:200px;max-width:none; display:inline" name="bauthor" class="form-control" placeholder="Author" required />
 
     <button type="submit" class="btn btn-primary" style="width:200px;display:inline">Search</button>
-    <a href="@Url.Action("ComplexSearch", "Home")" style="width:200px;position: relative; display:inline;left:850px;top:-3px;background-color:green;color:white;">Clear</a>
-
 
 }
 
