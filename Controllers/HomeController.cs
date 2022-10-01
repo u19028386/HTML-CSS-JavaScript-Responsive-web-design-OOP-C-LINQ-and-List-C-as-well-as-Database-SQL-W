@@ -13,6 +13,43 @@ namespace CDUDB1INF272.Controllers
         private SqlConnection myConnection = new SqlConnection(Globals.ConnectionString);
 
         private DataService dataService = DataService.getDataService();
+        public ActionResult BookInfo()
+        {
+            try
+            {
+                SqlCommand myComplexSearch;
+                myComplexSearch = new SqlCommand("select borrowId,takenDate, broughtDate, students.name as sname from borrows inner join students on borrows.studentId = students.studentId", myConnection);
+
+                myConnection.Open();
+
+
+                SqlDataReader myReader = myComplexSearch.ExecuteReader();
+                Globals.borrowList.Clear();
+                while (myReader.Read())
+                {
+                   
+                    BorrowModel tmpBorrows = new BorrowModel();
+                    tmpBorrows.ID = Convert.ToInt32(myReader["borrowId"]);
+                    tmpBorrows.BroughtDate = Convert.ToDateTime(myReader["broughtDate"]);
+                    tmpBorrows.TakenDate = Convert.ToDateTime(myReader["takenDate"]);
+                    tmpBorrows.BorrowedBy = myReader["sname"].ToString();
+                    
+
+
+                    Globals.borrowList.Add(tmpBorrows);
+                }
+
+            }
+            catch (Exception err)
+            {
+                ViewBag.Status = 0;
+            }
+            finally
+            {
+                myConnection.Close();
+            }
+            return View(Globals.borrowList);
+        }
 
         public ActionResult ViewStudent()
         {
@@ -22,7 +59,7 @@ namespace CDUDB1INF272.Controllers
                 myComplexSearch = new SqlCommand("select studentId,name, surname,class,point  from students" , myConnection);
 
                 myConnection.Open();
-                //Read all person records for table
+                
 
                 SqlDataReader myReader = myComplexSearch.ExecuteReader();
                 Globals.studentList.Clear();
@@ -130,6 +167,19 @@ namespace CDUDB1INF272.Controllers
             return RedirectToAction("BookIndex");
         }
 
+        [HttpGet]
+            public ActionResult MView(int id)
+            {
+            BorrowModel foundB = dataService.getBById(id);
+                return View(foundB);
+            }
+
+            [HttpPost]
+            public ActionResult MView(BorrowModel someB)
+            {
+                dataService.BooksInfo(someB);
+                return View();
+            }
 
 
         // new 

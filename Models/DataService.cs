@@ -188,7 +188,29 @@ namespace CDUDB1INF272.Models
             return b;
         }
 
+        public bool BooksInfo(BorrowModel someB)
+        {
+            bool status = false;
+            try
+            {
+                openConnection();
+                String cmd = "select borrowId,takenDate, broughtDate, students.name as sname from borrows inner join students on borrows.studentId = students.studentId" + someB.ID + ";";
+                SqlCommand command = new SqlCommand(cmd, currConnection);
+                command.ExecuteNonQuery();
+                closeConnection();
+                status = true;
 
+            }
+            catch (Exception e)
+            {
+                status = false;
+            }
+            finally
+            {
+                closeConnection();
+            }
+            return status;
+        }
 
 
         // new

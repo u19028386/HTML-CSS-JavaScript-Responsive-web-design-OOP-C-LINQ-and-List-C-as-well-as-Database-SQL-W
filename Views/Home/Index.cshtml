@@ -43,7 +43,7 @@
             <td>@dest.PageCount</td>
             <td>@dest.Points</td>
             <td>function needed</td>
-            <td>buttons</td>
+            <td>@Html.ActionLink("Update", "MView", "Home", new { id = dest.ID }, htmlAttributes: new { @class = "btn btn-primary" })</td>
 
 
         </tr>

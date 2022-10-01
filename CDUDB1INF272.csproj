@@ -170,7 +170,8 @@
     <Content Include="Views\Home\BookIndex.cshtml" />
     <Content Include="Views\Home\Me.cshtml" />
     <Content Include="Views\Home\ViewStudent.cshtml" />
-    <Content Include="Views\Home\ComplexSearch.cshtml" />
+    <Content Include="Views\Home\BookInfo.cshtml" />
+    <Content Include="Views\Home\MView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
