@@ -1,0 +1,33 @@
+﻿@model IEnumerable<CDUDB1INF272.Models.Student>
+@{
+    ViewBag.Title = "ViewStudent";
+}
+
+<h2>ViewStudent</h2>
+
+
+<table class="table" id="t1">
+    <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Class</th>
+        <th>Points</th>
+        <th></th>
+    </tr>
+
+    @foreach (var student in Model)
+    {
+        <tr>
+            <td>@student.ID</td>
+            <td>@student.Name</td>
+            <td>@student.Surname</td>
+            <td>@student.CClass</td>
+            <td>@student.Points</td>
+            <td>buttons</td>
+        </tr>
+    }
+
+</table>
+
+
