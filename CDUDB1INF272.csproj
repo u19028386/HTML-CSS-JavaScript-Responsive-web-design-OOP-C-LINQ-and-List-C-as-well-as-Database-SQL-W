@@ -165,13 +165,8 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Update.cshtml" />
-    <Content Include="Views\Home\Add.cshtml" />
-    <Content Include="Views\Home\BookIndex.cshtml" />
     <Content Include="Views\Home\Me.cshtml" />
     <Content Include="Views\Home\ViewStudent.cshtml" />
-    <Content Include="Views\Home\BookInfo.cshtml" />
-    <Content Include="Views\Home\MView.cshtml" />
     <Content Include="Views\Home\Dropdown1.cshtml" />
     <Content Include="Views\Home\ComplexSearch.cshtml" />
     <Content Include="Views\Home\ComplexS.cshtml" />

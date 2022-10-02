@@ -7,19 +7,13 @@
 @using (Html.BeginForm("ComplexS", "Home", FormMethod.Post, new { style = "width:100%" }))
 {
     <input type="text" style="width:200px;max-width:none; display:inline" name="studentname" class="form-control" />
-    //<span>@Html.DropDownList("Classes")</span>
-
-
-    //<input type="text" style="width:200px;max-width:none; display:inline" name="btype" class="form-control" placeholder="Type" required />
-    //<input type="text" style="width:200px;max-width:none; display:inline" name="bauthor" class="form-control" placeholder="Author" required />
-
+    <span>@Html.DropDownList("Classes")</span>
     <button type="submit" class="btn btn-success" style="width:200px;display:inline">Search</button>
     <button type="button" class="btn btn-danger" style="width:200px;display:inline" onclick="location.href='@Url.Action("ViewStudent", "Home")'">Clear</button>
 
 
 }
-@*<input type="text" style="width:200px;max-width:none; display:inline" name="studentname" class="form-control" />*@
-@*<span>@Html.DropDownList("Classes")</span>*@
+
 
 <table class="table" id="t1">
     <tr>

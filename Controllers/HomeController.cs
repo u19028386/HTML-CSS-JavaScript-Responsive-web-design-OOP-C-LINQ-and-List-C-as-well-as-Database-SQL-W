@@ -276,19 +276,8 @@ namespace CDUDB1INF272.Controllers
             return RedirectToAction("BookIndex");
         }
 
-        [HttpGet]
-            public ActionResult MView(int id)
-            {
-            BorrowModel foundB = dataService.getBById(id);
-                return View(foundB);
-            }
-
-            [HttpPost]
-            public ActionResult MView(BorrowModel someB)
-            {
-                dataService.BooksInfo(someB);
-                return View();
-            }
+        
+            
 
         public ActionResult Dropdown1()
         {

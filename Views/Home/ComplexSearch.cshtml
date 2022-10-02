@@ -16,14 +16,13 @@
 
     <button type="submit" class="btn btn-success" style="width:200px;display:inline">Search</button>
     <button type="button" class="btn btn-danger" style="width:200px;display:inline" onclick="location.href='@Url.Action("Index", "Home")'">Clear</button>
-
+   
 
 }
 
 @*@Html.DropDownList("Types");*@
 @*@Html.DropDownList("Authors");*@
 
-<button class="btn btn-primary" style="width:200px;display:inline" onclick="location.href='@Url.Action("ViewStudent", "Home")'">View Students</button>
 
 <table class="table" id="t1">
     <tr>
@@ -47,7 +46,7 @@
             <td>@dest.PageCount</td>
             <td>@dest.Points</td>
             <td>@dest.Available</td>
-            <td>@Html.ActionLink("View", "MView", "Home", new { id = dest.ID }, htmlAttributes: new { @class = "btn btn-primary" })</td>
+            <td>@Html.ActionLink("View Book", "Me", "Home", new { id = dest.ID }, htmlAttributes: new { @class = "btn btn-primary" })</td>
 
 
         </tr>
