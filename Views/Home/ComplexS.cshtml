@@ -1,7 +1,9 @@
 ﻿@model IEnumerable<CDUDB1INF272.Models.Student>
 @{
-    ViewBag.Title = "ViewStudent";
+    ViewBag.Title = "ComplexS";
 }
+
+<h2>ComplexS</h2>
 
 <h2>Students</h2>
 @using (Html.BeginForm("ComplexS", "Home", FormMethod.Post, new { style = "width:100%" }))
@@ -39,10 +41,24 @@
     <td>@student.Surname</td>
     <td>@student.CClass</td>
     <td>@student.Points</td>
-    <td><button id="bbook"class="btn btn-primary">Borrow Book</button></td>
+    <td><button id="bbook" class="btn btn-primary" onclick="myFunction()">Borrow Book</button></td>
+
 </tr>
     }
 
 </table>
+
+<script type="text/javascript">
+    const element = document.getElementById("bbook");
+    element.addEventListener("click", myFunction);
+
+    function myFunction() {
+    
+        document.getElementById("bbook").backgroundcolor = "blue";
+        document.getElementById("bbook").textContent = "Return Book";
+    }
+</script>
+
+
 
 

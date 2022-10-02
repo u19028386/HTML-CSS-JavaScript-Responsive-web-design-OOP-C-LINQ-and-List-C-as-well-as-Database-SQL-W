@@ -160,6 +160,46 @@ namespace CDUDB1INF272.Controllers
             }
             return View(Globals.complexList);
         }
+
+        public ActionResult ComplexS(string studentname)
+        {
+            try
+            {
+                SqlCommand myComplexSearch;
+                myComplexSearch = new SqlCommand("select studentId,name, surname,class,point from students WHERE name =" + studentname, myConnection);
+
+                myConnection.Open();
+
+
+                SqlDataReader myReader = myComplexSearch.ExecuteReader();
+                Globals.studentList.Clear();
+                while (myReader.Read())
+                {
+                    Student stud = new Student();
+
+                    stud.Name = myReader["name"].ToString();
+                    stud.Surname = myReader["surname"].ToString();
+                    stud.ID = Convert.ToInt32(myReader["studentId"]);
+                    stud.CClass = myReader["class"].ToString();
+                    stud.Points = Convert.ToInt32(myReader["point"]);
+
+
+
+                    Globals.studentList.Add(stud);
+                }
+            
+              
+            }
+            catch (Exception err)
+            {
+                ViewBag.Status = 0;
+            }
+            finally
+            {
+                myConnection.Close();
+            }
+            return View(Globals.studentList);
+        }
         public ActionResult Index()            
         {
             SqlCommand myComplexSearch;
