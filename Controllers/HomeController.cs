@@ -55,6 +55,27 @@ namespace CDUDB1INF272.Controllers
 
         public ActionResult ViewStudent()
         {
+            //dropdown begin
+            SqlCommand myComplexSearch2;
+            myComplexSearch2 = new SqlCommand("select * from students", myConnection);
+
+            myConnection.Open();
+            SqlDataAdapter datasetA2 = new SqlDataAdapter(myComplexSearch2);
+            DataSet datas2 = new DataSet();
+            datasetA2.Fill(datas2);
+            ViewBag.classname = datas2.Tables[0];
+            List<SelectListItem> getClassname = new List<SelectListItem>();
+
+            foreach (System.Data.DataRow dr1 in ViewBag.classname.Rows)
+            {
+                getClassname.Add(new SelectListItem { Text = dr1["class"].ToString(), Value = dr1["class"].ToString() });
+            }
+
+            ViewBag.Classes = getClassname;
+            myConnection.Close();
+            //end
+
+
             try
             {
                 SqlCommand myComplexSearch;
@@ -79,7 +100,9 @@ namespace CDUDB1INF272.Controllers
 
                     Globals.studentList.Add(stud);
                 }
+
                 
+
             }
             catch (Exception err)
             {
@@ -91,12 +114,12 @@ namespace CDUDB1INF272.Controllers
             }
             return View( Globals.studentList);
         }
-        public ActionResult ComplexSearch(int id)
+        public ActionResult ComplexSearch(string bookname)
         {
             try
             {
                 SqlCommand myComplexSearch;
-                myComplexSearch = new SqlCommand("select books.pagecount,books.point, books.name,books.bookId,authors.name as author, types.name as tname from books inner join authors on books.authorID = authors.authorID inner join types on books.typeId = types.typeID WHERE books.bookId =" + id , myConnection);
+                myComplexSearch = new SqlCommand("select books.pagecount,books.point, books.name,books.bookId,authors.name as author, types.name as tname from books inner join authors on books.authorID = authors.authorID inner join types on books.typeId = types.typeID inner join borrows on books.bookId= borrows.bookId WHERE books.name =" + bookname , myConnection);
 
                 myConnection.Open();
               
@@ -112,10 +135,16 @@ namespace CDUDB1INF272.Controllers
                     book.ID = Convert.ToInt32(myReader["bookid"]);
                     book.PageCount = Convert.ToInt32(myReader["pagecount"]);
                     book.Points = Convert.ToInt32(myReader["point"]);
-                    //tmpDest.Available = Convert.ToBoolean(reader["Available"]);
+                    book.Available = myReader["Available"].ToString();
                     book.Type = myReader["tname"].ToString();
+                    book.mDate = Convert.ToDateTime(myReader["borrows.broughtDate"]);
+                    if (book.mDate == null)
+                    {
+                        book.Available = "Available";
+                    }
+                    else book.Available = "Out";
 
-                   
+
                     Globals.complexList.Add(book);
                 }
                 ViewBag.SearchStatus = 2;
@@ -129,7 +158,7 @@ namespace CDUDB1INF272.Controllers
             {
                 myConnection.Close();
             }
-            return View("Index",Globals.complexList);
+            return View(Globals.complexList);
         }
         public ActionResult Index()            
         {
@@ -245,41 +274,7 @@ namespace CDUDB1INF272.Controllers
         }
 
 
-        // new 
-        //    [HttpGet]
-        //    public ActionResult Update(int id)
-        //    {
-        //        DestinationModel foundDest = dataService.getDestById(id);
-        //        return View(foundDest);
-        //    }
-
-        //    [HttpPost]
-        //    public ActionResult Update(DestinationModel someDest)
-        //    {
-        //        dataService.updateDest(someDest);
-        //        return RedirectToAction("Index");
-        //    }
-
-        //    [HttpGet]
-        //    public ActionResult Add()
-        //    {
-        //        return View();
-        //    }
-
-        //    [HttpPost]
-        //    public ActionResult Add(DestinationModel someDest)
-        //    {
-        //        ViewBag.Message = dataService.createDest(someDest);
-        //        return RedirectToAction("Index");
-
-
-        //    }
-
-        //    public ActionResult Delete(int id)
-        //    {
-        //        dataService.deleteDest(id);
-        //        return RedirectToAction("Index");
-        //    }
+        
 
 
 

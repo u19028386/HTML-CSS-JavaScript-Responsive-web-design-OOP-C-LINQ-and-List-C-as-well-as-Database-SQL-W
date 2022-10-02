@@ -1,8 +1,10 @@
 ﻿@model IEnumerable<CDUDB1INF272.Models.DestinationModel>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "ComplexSearch";
 }
-<h1 class="display-4">Index</h1>
+
+<h2>Index</h2>
+
 <h3>@ViewBag.Message</h3>
 @using (Html.BeginForm("ComplexSearch", "Home", FormMethod.Post, new { style = "width:100%" }))
 {
@@ -13,20 +15,15 @@
     //<input type="text" style="width:200px;max-width:none; display:inline" name="bauthor" class="form-control" placeholder="Author" required />
 
     <button type="submit" class="btn btn-success" style="width:200px;display:inline">Search</button>
-    <button type="button"class="btn btn-danger" style="width:200px;display:inline" onclick="location.href='@Url.Action("Index", "Home")'">Clear</button>
-   
+    <button type="button" class="btn btn-danger" style="width:200px;display:inline" onclick="location.href='@Url.Action("Index", "Home")'">Clear</button>
+
 
 }
 
 @*@Html.DropDownList("Types");*@
 @*@Html.DropDownList("Authors");*@
 
-
-
-
-
-@*<a href="@Url.Action("Index", "Home")" style="width:200px;position: relative; display:inline;left:850px;top:-3px;background-color:green;color:white;">Clear</a>*@
-
+<button class="btn btn-primary" style="width:200px;display:inline" onclick="location.href='@Url.Action("ViewStudent", "Home")'">View Students</button>
 
 <table class="table" id="t1">
     <tr>
@@ -57,4 +54,6 @@
     }
 
 </table>
+
+
 

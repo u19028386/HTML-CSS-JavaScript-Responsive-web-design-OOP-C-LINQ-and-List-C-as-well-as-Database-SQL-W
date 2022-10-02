@@ -16,11 +16,17 @@ namespace CDUDB1INF272.Models
 
         public int Points { get; set; }
 
-        public bool Available { get; set; }
+        public string Available { get; set; }
+
+        public BorrowModel SStatus { get; set; }
+        public BorrowModel RDate { get; set; }
+
+        public DateTime mDate { get; set; }
 
 
 
-        public DestinationModel(int bookid, string name, string author, string type, int pageCount, int point, bool available)
+
+        public DestinationModel(int bookid, string name, string author, string type, int pageCount, int point, string available, DateTime sdateTime)
         {
             ID = bookid;
             Name = name;
@@ -29,6 +35,9 @@ namespace CDUDB1INF272.Models
             PageCount = pageCount;
             Points = point;
             Available = available;
+            mDate = sdateTime;
+            SStatus = new BorrowModel();
+            RDate = new BorrowModel();
         }
 
         public DestinationModel()
